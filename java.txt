@@ -1,0 +1,53 @@
+------------------------------- Java ---------------------------
+
+    Java is an object oriented programming language.
+
+__Object oriented lang___
+
+    language which supports these 6 concepts.(class,object,polymorphism,inheritence,abstraction,encapsulation.)
+
+__object based lang___
+    
+    Lang which supports only class and object concepts.
+
+__structed lang____
+
+    Lang which does not support any of these concepts.
+
+---Features of Java.---
+ 
+    1.platform independent.
+    2.case sensitive.
+
+--- Components
+    
+    JDk- software to develop java based applications.
+    JRE- Enviroment to run java applications.
+    JVM- compiles code,code is converted into byte code.
+    
+
+---Java versions
+
+    1-8 versions - sun microsystems.
+    from 9th version oracle acquired sun microsystems.
+
+
+_Naming conversions.
+
+    1.class name should start with uppercase.
+    2.class name should not start with number,but can contain numbers.
+    3.class name contains __
+    4.special characters are not allowed.
+
+__Datatypes.
+
+    1.primitives- 
+    num without decimal-byte,short,intlong.
+    num with decimal-float,double. 
+    char-single character.
+    boolean-t/f.
+
+    2.non-primitives.
+    string,arraylist,hashmap,...etc.
+
+    
