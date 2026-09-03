@@ -1,0 +1,117 @@
+------------ OOPS --------------
+
+    Object oriented programming is a programming approach where we organize a program around object rather than functions and procedures.
+
+
+    function  ---> is block of code to do specific task.
+    procedure ---> is block of code that performs some action without returning anything.
+
+CLASS :
+
+    class is a template / blueprint to create objects.
+
+    class is also called as user-defined datatype.
+
+    Student s1; ---> declaration of class.
+    
+    s1 = new Student(); 
+   
+    s1 is in stack and stores address(start) of space in heap memory.
+
+    1.s1 is called reference variable, it is not a object it is variable which stores address.
+    2.object is stored in heap memory and it dont have any specific name.(unnamed.)
+
+    new KEYWORD :
+
+        'new' keyword will allocated some space in heap memory and this allocation is at runtime so this process is called "DYNAMIC MEMORY ALLOCATION."
+
+    ---> int x =5; it is not static memory allocation this is at compile time.
+
+    . OPERATOR :
+
+        It is used to move to the object in heap.
+
+    --> variables defined in class are called "instance variables." and methods are called "instance methods."
+
+    --> instance variables have default values but local variables have no values because they have short scope and they are temporary.
+    
+    --> Default value of an object is null.
+
+CONSTRUCTORS :
+
+    Construtors are used to create an object.
+
+    RULES :
+
+        1.same name as class .
+        2.no return type not even void.
+        3.automatically called while object creation.
+        4.used to initialise an object.
+        5.It can also be overloaded.
+
+    DEFAULT CONSTRUTOR :
+      
+        Java automatically creates it.
+
+        --> when we create our own construtor default construtor gets deleted.
+
+    PARAMETERIZED CONSTRUTOR:
+
+        construtor which has parameters.
+
+this KEYWORD :
+
+    'this' keyword refers to the current object.
+
+    this stores current objects reference.
+
+    1.used in constructor to avoid confusion between instance variables and construtor parameters.
+    2.used to call other contrutor in a construtor.(this())
+
+CONSTRUCTOR CHAINING :
+
+    one constructor is called in another construtor using this().when we have multiple construtors and want to reuse the initialization code instead of writing it again.
+---> constructor calling using this() should be exactly in the first line of another construtor.
+
+---> we cannot call construtor manually.
+---> what if space is not enough to create an object dynamically?
+       then we get runtime exception-space not enough in heap.
+
+OBJECTS :
+
+    size of reference variables in stact 4/8 byte depends on jvm usually 4 bytes.
+
+    object size 
+         -> object headers -> contains metadata(1.markwords -> about lock,synchronization,garbage collection. (8 bytes) 2.class pointer -> reference of class (4/8 bytes.))
+         -> exact fields   -> exact data (variables (primitive) and references )
+         -> padding        -> when cpu takes data for processing it takes in multiple of 8 bytes.
+
+         8 + 4    + 16  = 28  padding will be 32-28 = 4 bytes.
+    
+CALL BY VALUE vs.  CALL BY REFERENCE 
+
+    call by value :
+        when we call a method using variables in class the values of these variables copies to the method declaration and these wont affect the original variables.
+
+    call by reference :
+        when we call a method using variables in class the original variables are passed to the method declaration. hence
+    original value gets changed.
+
+    ----> java uses call by value.
+
+SHALLOW COPY & DEEP COPY :
+
+    we can pass an object to construtor
+
+    Truck(Truck t){
+        this.color =t.color;
+        this.wheels=t.wheels;
+    }
+
+    Truck t1=new Truck();
+    t1.color= black;
+    t1.wheels=16;
+    Truck t2=new Truck(t1); ---> deep copy.    (if we change values with t2, t1 values wont change.)
+    Truck t3=t1             ---> shallow copy. (if we change values with t3, t1 values will change.)
+
+
