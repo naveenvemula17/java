@@ -25,7 +25,7 @@ CLASS :
 
         'new' keyword will allocated some space in heap memory and this allocation is at runtime so this process is called "DYNAMIC MEMORY ALLOCATION."
 
-    ---> int x =5; it is not static memory allocation this is at compile time.
+    ---> int x =5; it is static memory allocation this is at compile time.
 
     . OPERATOR :
 
@@ -91,10 +91,10 @@ OBJECTS :
 CALL BY VALUE vs.  CALL BY REFERENCE 
 
     call by value :
-        when we call a method using variables in class the values of these variables copies to the method declaration and these wont affect the original variables.
+        when we call a method using variables the values of these variables copies to the method declaration and these wont affect the original variables.
 
     call by reference :
-        when we call a method using variables in class the original variables are passed to the method declaration. hence
+        when we call a method using variables the original variables are passed to the method declaration. hence
     original value gets changed.
 
     ----> java uses call by value.
@@ -114,4 +114,51 @@ SHALLOW COPY & DEEP COPY :
     Truck t2=new Truck(t1); ---> deep copy.    (if we change values with t2, t1 values wont change.)
     Truck t3=t1             ---> shallow copy. (if we change values with t3, t1 values will change.)
 
+STATIC :
 
+    If there is a property for all the objects so then dont need to initialise it again and again.we can initialize it in class with 'static' variable so that value will be common for all the created objects.
+
+    Student s1= new Student();
+
+    s1.college="iit"
+
+    Student.college ="iit"
+
+        both are correct ways to access but using class is recommended,if we change one object college value all the objects will be initialised to new value,for the programn execution to save it permanently change/ save value in db/file.
+
+    --> static variables are not stored in heap.
+
+    --> it is common for all objects and it is in class it is called as class variable.
+    
+    --> same goes for static methods.
+
+    Rules for static method :
+
+       1.one static method can only call other static method.(if there is a non-static method in static method so when we call static method without creating object we cant call non-static method. )
+       2.static methods can only use static variables.
+       3.static methods does not have access to this keyword.
+
+    static block :
+        It is used to initialise static variables or logic.
+
+        static block only executes once that is after class loaded, and it wont execute for every object creation.
+
+    class cannot be static but nested class can be.
+
+FINAL :
+
+    final variables are constants and by convention we write them in UPPER CASE.(if there are multiple words we separate them with underscores.)
+
+
+    -> Declaration and initialisation is only once(final variables values cannot be changed.)
+
+    -> Final (variables,methods,class,parameters)
+
+we can initialise a variable with both static and final.
+
+String[] args ?
+
+    previous there is only one way of taking input by giving them after 
+
+    1.javac Trail.java
+    2.java Trail "naveen "nithin" "rajitha"
