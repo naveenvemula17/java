@@ -162,3 +162,48 @@ String[] args ?
 
     1.javac Trail.java
     2.java Trail "naveen "nithin" "rajitha"
+
+ENCAPSULATION:
+
+    Means to form a capsule.
+
+    1.Both data & Behaviour should be wrapped within an object. (done by creating object using template.)
+    2.we should not provide unrestricted access of data.(using access modifiers,getter and setter methods.)
+
+
+ACCESS MODIFIERS :
+
+    public 
+    default
+    protected
+    private   on variables,methods,construtors,class.
+
+    default : A package group similar classes/Interfaces together.
+
+        -> Anyone can access belongining to same package.
+    
+    Protected :
+        same package + Inherited class(child class)
+
+    public : any one can access.
+
+    class : public,default 
+        -> private is used for inner class but if main class is private it is of no use.
+        
+PACKAGES :
+
+    when we use java.util.ArrayList;
+
+    JVM loads ArrayList.class files into our file.
+
+    In-built packages :
+
+        java.util.*;
+        java.lang;
+        java.io;
+
+    -> to access methods from another package we need to import package and methods should also be public.
+
+INHERITENCE :
+
+    
