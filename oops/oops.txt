@@ -206,4 +206,39 @@ PACKAGES :
 
 INHERITENCE :
 
+    use extends keyword to inherit parent class members.
+
+    --> Code reusability.
+    --> Supports polymorphism.
+
+    Parent class -> super class 
+    Child class  -> sub class.
+
+    Protected access modifier used with parent class to excess its members by its child class outside of its package.
+
+    TYPES OF INHERITENCE :
+
+        1.Simple inheritence. A -> B 
+
+        2.Multi-level inheritence A -> B -> C.
+
+        3.Hierarchial inheritence.
+
+                    A 
+                   / \  
+                  B   C 
+
+        4. Multiple inheritence -> not supported by java, due to diamond problem.
+
+        Diamond problem -> if a class is child of two or more classes then if the parent classes contain same members,so jvm couldnt configure which one to use when we call it in child class.
+
+        To avoid this we have interfaces in java.
+
+SUPER KEYWORD :
+
+    this -> reference of current object.
+    super -> parent reference object.
+
+    To pass parent members  to child.
+    It also helps in calling parent constructor in child.
     
