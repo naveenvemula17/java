@@ -241,4 +241,79 @@ SUPER KEYWORD :
 
     To pass parent members  to child.
     It also helps in calling parent constructor in child.
+
+ABSTRACTION :
+
+    The process of focussing on what something does rather than how it does.
+
+    Low -level abstraction.(classes)
+    High-level abstraction.
+
+    Vehicle v=new Car();
+
+    -> v can access methods of vehicle and methods of vehicle that are overriden in car.
+
+    -> when we want to declare a method and want to define it later by its child classes we use abstract keyword before method and if any one method is abstract in a class, the class will also be abstract. When a class is abstract we cant instantiate the object.
+
+    -> Child classes inherited by abstract class should give abstract methods defination otherwise it will also be a abstract class.
     
+abstract KEYWORD :
+    
+    Used before classes and methods, to give definitions later by its sub classes.
+
+INTERFACE :
+
+    All methods in interface are public and abstract.
+
+    -> To inherit properties of interface we use "implements" keywords.
+
+    -> In old java methods are all declared only.
+
+    reasons for interface introduction :
+
+        1.Its about pure what ? because its defination is not in this body.
+
+        2.It gives roles,responsibilites / capabilities.
+
+            Eg : if we take car as interface every car have start,accelerate,brake which are must features of a car if honda is a car it should implement this car by adding definitions to these.
+
+        3.Abstract class is about family of similar objects.
+
+Encapsulation vs. Abstraction :
+
+    Encapsulation : 
+
+        1.Data wrapping.(class)
+        2.Data security. -> restricted access of data by using access modifiers, setters and getters.
+
+    Abstraction :
+
+        Hiding implementation details and showing essential features to the user.
+
+POLYMORPHISM :
+
+    same object behaves differently on same command but when one parameter is changed.
+
+    Compile time polymorphism :
+
+        While compiling which method to be taken is decided if there is method overloading.
+
+    Run time polymorphism :
+
+        method is chosen at runtime among overidden methods in child classes because object is created at runtime.
+
+    -> For static methods java looks at reference type.
+
+            Assume Vehicle contains static method kick() and Car also contains static method kick(), Vehicle v=new Car() the reference type method is called.
+
+            if they are not static methods then the car's kick method is called which overriden in car class.
+
+    -> Private methods cannot be overridden.
+    -> Final methods cannot be overriden.
+    -> Fields/variables cannot be polymorphic.
+    -> final class - cannot be inherited by any child class.
+        
+        if there is same variable in parent and child class if value is different in both classes,  Vehicle v=new Car() if print v.tires we get value in vehicle class because variables are not overridden and depends on reference type.
+
+    
+
