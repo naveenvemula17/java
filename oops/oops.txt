@@ -404,3 +404,93 @@ POJO CLASSES :
     Anemic model      : data + constructors + getters & setters + little /no business logic.
     Rich domain model : data + business logic.(methods like markAttendence in student class.)
     
+NESTED CLASSES :
+
+    Class inside another class.
+
+    NEED :
+
+        -> Logical grouping.
+        -> better access of outer classes.(means inner class can access private memebers of outer class.)
+    
+    TYPES :
+
+        STATIC NESTED CLASS :
+
+            Assume it as a static block and as it is static we need to use it with classname.
+
+            Assume Inner is the class inside of Outer class then we can create object of inner class by using :
+
+                Outer.Inner = new Outer.Inner();
+
+            -> we cant access non-static members of outer class directly. (if we access we will get error.)
+            -> To access them we need to have reference of outer class.
+
+            USES:
+
+                1.used as helper class.
+                2.used in builder design pattern.
+
+        INNER CLASS :
+
+            non-static class inside of static class.
+
+            -> Inner class object always stores reference of outer class and inner class object is not inside of outer class object.
+
+            -> Inner class can access static and non-static members of outer class.
+
+            -> static members are not allowed upto java 16.because confusion of static members to should be same for all outer class objects.
+
+            To access inner class members we need to create outer class object.
+
+            Outer outer =new Outer();
+
+            Outer.Inner inner = outer.new Inner(); or 
+
+            Outer.Inner inner = new Outer().new Inner();
+
+    LOCAL CLASSES :
+
+        Class between {} is called local class. {} can be of any of if{},for{},fun(){}..
+
+        -> It can access all static and non-static members of outer class.
+
+        -> To access a local variable in local class it should be effectively final.
+
+        effectively final variable :
+
+            A local variable whose value is not modified after initializing.
+
+            -> when local variable is initialised before class ,class copies the variable but when you modify it java confuses to copy which variable(old or updated.),to counter this we have effectively final variable.
+            it copies because assume local class is in a function and it has some return type object and when we call it from outside function returns object,so to use its object members it copies. 
+
+    ANONYMOUS CLASS :
+
+        class with no name.
+
+        Car car = new Car(){
+            @override
+            brake{
+
+            }
+        };
+
+        we can declare variables and methods in anonymous methods but we cant directly call by using car.method(),we can use them in override function.
+        To call them they should be overriden in anonymous class or they should be directly in main class.
+
+        -> There will be no constructors in anonymous class.
+
+        USE :
+
+            when we only require the object only once.
+
+            Eg :
+
+                Animal ani = new Animal(){
+                    @override
+                    sound(){
+                        sout("bark");
+                    }
+                }
+        -> can access static and non-static members of outer class.
+        
