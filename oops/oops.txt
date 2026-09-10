@@ -241,6 +241,7 @@ SUPER KEYWORD :
 
     To pass parent members  to child.
     It also helps in calling parent constructor in child.
+    Creating a child object → parent constructor executes first (with super keyword) → then child constructor executes.
 
 ABSTRACTION :
 
@@ -261,6 +262,23 @@ abstract KEYWORD :
     
     Used before classes and methods, to give definitions later by its sub classes.
 
+    --> These class cannot be instantiated.
+
+    --> It may or maynot contain abstract method and also can contain normal method.
+
+    --> It is meant to be extended.
+
+    QUESTIONS :
+
+        Can abstract class have constructors ?   Yes, child class calls parent class constructor.(with super keyword directly without mentioning it by java.)
+
+        Can abstract class be final ?             No because it is meant to be instantiated.
+
+        can abstract class have static members ?  Yes
+
+        can abstract class have private methods ? Yes but they can be abstract.
+
+        can abstract class have final methods ?   yes
 INTERFACE :
 
     All methods in interface are public and abstract.
@@ -315,5 +333,74 @@ POLYMORPHISM :
         
         if there is same variable in parent and child class if value is different in both classes,  Vehicle v=new Car() if print v.tires we get value in vehicle class because variables are not overridden and depends on reference type.
 
-    
+WHY ONLY ONE PUBLIC CLASS :
 
+    Java uses the public class name to determine the file name.
+
+    The compiler expects the public class to match the filename so that classes can be easily located and compiled.
+
+    if there are two public classes,java wouldnt know what file should be named.
+    
+PRIMITIVES vs. WRAPPER classes
+
+    Some Java features work only with objects, not primitives.
+
+    Wrapper classes in Java are classes that represent primitive data types as objects.
+
+    Wrapper classes allow primitive values to be treated as objects, which is useful in collections, generics, and APIs that require objects.
+
+    -> primitives are fast and uses less memory compared to wrapper classes.
+
+Autoboxing :
+
+    int x=10;
+
+    Integer y=x;                             // this is called autoboxing.
+
+    internal working:
+
+        Integer y = new Integer(x);         // old practice.
+
+        Integer y = Integer.valueOf(x);     // new practice.
+
+    Integer x = 25;
+
+        int y = x;                              // this is called unboxing.
+     
+    internal working :
+
+        int y = x.intValue();
+
+    ---> if Integer x =null;
+
+            int y =  x;  when we print it we get null pointer exception.
+
+.equals vs == :
+
+    == compares references.
+    .equals compares values.
+
+    ---> From -128 to 127 if any two Integer objects values are same then == operator gives true because of caching in java. these numbers are already stored and have references already so we create a Integer object then the reference will be assigned.so both the objects when used with == operator gives true.
+
+        Integer a = 100;  a = s123;
+        Integer b = 100;  b = s123; ---> so a and b contains same reference s123 and points same object.
+        sout(a==b);  //true 
+
+POJO CLASSES :
+
+    POJO stands for plain old java object.
+
+    class with simply variables and setters and getters methods,without any framework and business logic.
+
+    A POJO is a simple Java class used mainly to store data. It generally does not need to extend a particular class or implement a particular interface.
+
+    ✅ Private instance variables
+    ✅ Public getters and setters
+    ✅ Constructors (optional)
+    ✅ No requirement to extend a specific class
+    ✅ No requirement to implement a specific interface
+    ✅ Usually used to represent/store data 
+
+    Anemic model      : data + constructors + getters & setters + little /no business logic.
+    Rich domain model : data + business logic.(methods like markAttendence in student class.)
+    
