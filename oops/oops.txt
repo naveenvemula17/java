@@ -493,4 +493,129 @@ NESTED CLASSES :
                     }
                 }
         -> can access static and non-static members of outer class.
+
+INPUT & OUTPUTS :
+
+    console i/o :
+
+    OUTPUT :
+
+        System.out.println("hello");
+        System.err.println("bye");
+
+        System   --> class in java.lang package which is automatically imported by jvm.
+        out,err  --> PrintStream object which is static and final == null;
+        println  --> method in PrintStream.
+
+    INPUT :
+
+        System.in
+
+        in       --> Inputstream object.
+
+    STREAMS :
+
+        Flow of data.
+
+        InputStream  --> Data flow INTO program.
+        OutputStream --> Data flow OUT of program.
+
+        These are abstract java classes.They just say they have read() and write() features but not how they read and write.
         
+        InputStream :                     OutputStream :
+
+            FileInputStream                    FileOutputStream
+            ByteArrayInputStream               ByteArrayOutputStream
+            BufferedInputStream                BufferedOutputStream
+            DataInputStream                    PrintStream
+
+        System.in --> gets data from keyboard.
+
+        InputStream uses read() to read from stream of Bytes.
+
+        -> when we type "A" read() method reads it from input, os will give its ASCII value binary value, and ascii's binary code will be stored in byte which moves in stream.
+
+        -> System.in.read() -> its return type is int and only reads one byte at a time.remaining are stored in input buffer.
+         
+            to read all characters we need loops. To counter this we have reader class in java.
+
+        Keyboard -> os buffer    -> program
+
+         a       ->  a in stream -> a in program
+
+    READER abstract class :
+
+        It is a abstract class to helps in reading stream of characters.
+
+        BufferedReader
+        InputStreamReader (both for console.)
+        FileReader        (reading files.)
+    
+        BufferedReader :
+
+            BufferedReader creates a buffer to store chunk of character from os and this buffer is in program memory whenever it directly access it.
+
+            Keyboard   ->  os buffer  ->  java buffer  -> program
+
+        But standard I/P is of InputStream type (object System.in),BufferedReader should internally work with InputStream.
+        But  BufferedReader is not compatible with InputStream because BufferedReader is stream of characters and InputStream is Stream of Bytes
+    
+        InputStreamReader class  converts stream of bytes to stream of characters.
+        
+            InputStream -> Stream of bytes - System.in
+
+            InputStreamReader isr = new InputStreamReader(System.in);
+            isr   ->  buffer of characters.
+
+            appply buffering,
+
+                BufferedReader br = new BufferedReader(isr); (takes all characters from os buffer as a chunk)
+
+                br.readLine(); ---> OUTPUT.
+
+        Flow :
+
+            1.typed "naveen" using keyboard.
+            2.os buffer converts it to binary code.
+            3.System.in (InputStream)recieves bytes 
+            4.InputStreamReader -> converts data to stream of characters.
+            5.BufferedReader reads all characters and stores them in java buffer.
+            6.when we call br.readline() -> forms string from buffer and returns string.
+        
+    Limitations of BufferReader :
+
+        1.It only reads only strings.
+        2.code is complicated.
+    
+SCANNER class :
+
+    Introduced in java 1.5, and it implements Readable interface.
+
+    It is not from java.io package, it is from java.util package.
+
+    -> simplified input.
+    -> It can read any datatype without typecasting.
+
+    Create object of scanner class give System.in (inputstream) in constructor.
+
+    from keyboard : Scanner inp = new Scanner(System.in);
+
+                    String line = inp.nextLine();
+
+    from file     : Scanner inp = new Scanner(new File(file name));
+
+    from string   : .... = new Scanner("");
+
+    ---> Scanner works on basis of tokenization.
+
+         String line = "this is naveen from telangana."
+                        1     2  3       4    5
+         using " " delimeter(divides the string) 
+
+    METHODS :
+
+        .nextline() -> reads whole line until u press enter.
+        .next()     -> reads next word.
+        .nextInt()  -> reads next integer.
+    
+    Scanner is slower than BufferedReader because internally it does a lot.
