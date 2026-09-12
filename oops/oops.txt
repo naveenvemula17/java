@@ -503,7 +503,7 @@ INPUT & OUTPUTS :
         System.out.println("hello");
         System.err.println("bye");
 
-        System   --> class in java.lang package which is automatically imported by jvm.
+        System   --> class in java.lang package which is automatically imported by javac.
         out,err  --> PrintStream object which is static and final == null;
         println  --> method in PrintStream.
 
@@ -619,3 +619,79 @@ SCANNER class :
         .nextInt()  -> reads next integer.
     
     Scanner is slower than BufferedReader because internally it does a lot.
+
+IMMUTABLE CLASS :
+
+    Rules for a class to be immutable.
+
+    1.class should be final.
+    2.variables should be private and final.
+    3.use only getters and avoid setters.
+
+    but when a class A has object of class  B ,then if we change members of class  B then the values in B object of A class will also change.Then A is not immutable object.This is the example of shallow copying.
+
+    To counter this we have defensive copy of constructors and getters.
+
+    -> Rather than giving B object's direct reference copy memebers to new object of B, in constructor and getter method. Then we have copy of B object in A class and when we get it using getter method another copy will be created and if we change any atrribute of objects there will be no effect on B's object in A class.
+
+    Uses :
+
+        useful for threads.
+
+OBJECT CLASS :
+
+    It is present in java.lang package.
+
+    -> Every class in java inherit from object class.
+
+    core methods of object class :
+
+        core methods:
+
+           1. obj.toString()    -> converts anything to string.(string representation of any object.) -> toString internally calls it.
+           2. s1.equals(s2)     -> compares to objects returns boolean
+           3. hashcode()        -> retuns an integer of an object in hexadecimal format.(takes an object and returns unique integer for it.)
+           4. getClass()        -> returns runtime class of an object.
+         
+        Cloning : clone()       -> creates copy of an object.(shallow copies)
+
+        Garbage collection() : finalize()  -> deprecated and called by garbage collector so this makes it unpredictable,unsafe.
+
+        Threads :
+            wait()
+            notify()
+            notifyAll()
+
+    -> In object class .equals methods acts as same to '=='. Object.equals() compares references by default. Classes such as String and wrapper classes override equals() to compare their values/content.
+        
+        Also remember: if you override equals(), you should normally override hashCode() as well.
+
+    -> If two objects are equal then there hashcode will definitely will be equal but if two hashcodes are equal it doesnt means both objects are equal.(it may or may not)
+
+        Objects.hashcode(name,age); -> java uses internally for hashcode generation.
+
+    -> Student s1 = new Student();
+
+        s1.getClass() --> returns a Class object representing the runtime class of s1. if we print it we get Class Student.
+
+        s1.getClass().getName() --> Student.
+
+    -> instanceOf operator :
+
+        if an object is an instance of a class or any of its subclass.
+
+        s1 instanceOf Student --> returns boolean.
+
+    
+    -> To override clone method the class should implement clonable interface and clone method is protected.
+        Throws CloneNotSupportedException
+
+        Student s7 = (Student) s1.clone();   -> creates new object and clones its members.
+
+    -> Marker Inteface :
+
+        interface whose body is empty. Cloneable 
+
+    -> In clone method in Object Class contains condition if it implements clonable interface then it can override otherwise throws exception "CloneNotSupportedException."
+
+    
