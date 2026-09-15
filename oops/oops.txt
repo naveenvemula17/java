@@ -694,4 +694,131 @@ OBJECT CLASS :
 
     -> In clone method in Object Class contains condition if it implements clonable interface then it can override otherwise throws exception "CloneNotSupportedException."
 
+ENUMS :
+
+    Problem : 
+
+        payment status -> success,failed,pending.
+
+        create a class with 3 static final variables success=1,failed =2, pending =3.
     
+        int status = PaymentStatus.success;
+        int status2 = 3;        -> to know what is the status we need to go through PaymentStatus class.
+        int status3 = 100;      -> we can put any value randomly.
+        we can compare with any other value if they are int and program still continues without error.
+
+    Introduced in java 5.
+
+    -> Enums stands for Enumerations.(Enumerated type)
+
+    -> java.lang.Enum (every enum extends Enum class.)
+
+    -> predefined set of constants which are static and final.(these constants are objects of defined enum class(PaymentStatus))
+
+    By using Enums we can avoid error like we cant assign random values,
+
+        enum PaymentStatus{
+            SUCCESS,
+            FAILED,
+            PENDING;
+        }
+    In main method :
+
+        PaymentStatus status = PaymentStatus.SUCCESS;
+
+        sout(status.name());
+
+    -> In Java, an enum (short for enumeration) is a special type used when a variable should only have one value from a fixed set of choices.
+        This gives you type safety and prevents invalid values.
+
+        enum Size {
+            SMALL(10),
+            MEDIUM(20),
+            LARGE(30);
+
+            private final int value;
+
+            Size(int value) {
+                this.value = value;
+            }
+
+            public int getValue() {
+                return value;
+            }
+        }
+
+        Size size = Size.MEDIUM;
+
+        System.out.println(size);            // MEDIUM
+        System.out.println(size.getValue()); // 20
+
+
+        the same code is also written as :
+
+            final class Size extends Enum <Size> {
+                public static final Size small = new Size();
+                public static final Size medium = new Size();
+                public static final Size big = new Size();
+
+                private Size(){}  
+            }
+
+            these variables act as markers.
+
+
+    EG:
+
+        class Main {
+            public static void main(String[] args) {
+                Direction d1 = Direction.NORTH;
+                System.out.println(d1.getValue());
+            }
+        }
+
+        enum Direction{
+            NORTH(0),            --->By using NORTH{} we can override methods inside of {}.
+            SOUTH(90),
+            WEST(180),
+            EAST(270);
+
+            private Direction(int value){
+                this.value=value;
+            }
+
+            private int value;
+
+            int getValue(){
+                return this.value;
+            }
+        }
+
+        --> we can also write abstract methods in it (no need of writing abstract before enum)
+
+        METHODS IN ENUM CLASS :
+            name()             -> returns the exact name of the enum constant as it was declared.
+            ordinal()          -> assume it like index of array number is by creation order,it returns int.
+
+        Compiler generated methods :
+
+        -> values()            -> returns array of values from enum.
+        -> valueOf("string")   -> converts a string into an enum constant. (it takes string "EAST" and converts it into EAST object in enum, returns it and it is case sensitive.)
+        
+        enum Status {
+            PENDING,
+            APPROVED;
+
+            @Override
+            public String toString() {
+                return name().toLowerCase();
+            }
+        }
+
+        Status status = Status.PENDING;
+
+        System.out.println(status.name());          // PENDING
+        System.out.println(status.toString());      // pending
+
+        toString() can be overridden, while name() cannot,because its a final method.
+
+
+
