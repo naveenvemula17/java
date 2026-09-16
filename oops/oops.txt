@@ -264,7 +264,7 @@ abstract KEYWORD :
 
     --> These class cannot be instantiated.
 
-    --> It may or maynot contain abstract method and also can contain normal method.
+    --> It may or maynot contain abstract method and also can contain normal method.(concrete)
 
     --> It is meant to be extended.
 
@@ -272,7 +272,7 @@ abstract KEYWORD :
 
         Can abstract class have constructors ?   Yes, child class calls parent class constructor.(with super keyword directly without mentioning it by java.)
 
-        Can abstract class be final ?             No because it is meant to be instantiated.
+        Can abstract class be final ?             No because it is meant to be extended.
 
         can abstract class have static members ?  Yes
 
@@ -281,21 +281,61 @@ abstract KEYWORD :
         can abstract class have final methods ?   yes
 INTERFACE :
 
-    All methods in interface are public and abstract.
+      REASONS for interface introduction :
 
-    -> To inherit properties of interface we use "implements" keywords.
-
-    -> In old java methods are all declared only.
-
-    reasons for interface introduction :
-
-        1.Its about pure what ? because its defination is not in this body.
+        1.Its about pure what ? because its defination is not there in the body.
 
         2.It gives roles,responsibilites / capabilities.
 
             Eg : if we take car as interface every car have start,accelerate,brake which are must features of a car if honda is a car it should implement this car by adding definitions to these.
 
         3.Abstract class is about family of similar objects.
+
+    All methods in interface are public and abstract. (java 8 added static and default methods.java 9 added private methods.)
+
+    -> To inherit properties of interface we use "implements" keywords in class and to allow inheritance in interfaces we use extends.
+
+    -> In old java methods are all declared only.
+
+    -> It supports multiple inheritance. public abstract methods -> (because there will be no definition in the body of interface it should be implemented by class.)
+
+    -> if there are default methods with same name in interfaces then class should have its own implementation.
+
+    -> InterfaceName.super.methodName() can be used inside the implementing class to explicitly call the interface's default method.
+
+    JAVA RESOLUTION PRIORITY :
+
+        when a class inherited both class and interface which contains same method then java executes class method.
+
+    Functional Interface :
+
+        Interface which only contains one method(abstract)
+
+        Functional interface allows us functional programming through lamba expressions in java.
+
+        EG : comparable,predicate..
+
+    Marker Interface :
+
+        Interface with no method(empty).
+
+        Eg: Cloneable,Serializable,randomAcsess
+
+        A class can use clone method only when it implements cloneable interface.It is a marker interface which is empty,it is only to mark
+
+    INTERFACE VS ABSTRACT CLASS :
+
+        Interface defines contract/roles/funtionalities whereas abstract class is base of similar classes.
+
+        -> Interface is "can-d0" relation whereas abstract class is "is-a" relation.
+
+        -> Interface cannot contain variables they only contain constants, but abstract class can contain variables.
+
+        -> No constructors in interface but abstract class can have constructor.
+
+        -> Interface supports multiple inheritance and abstract class dont.
+
+
 
 Encapsulation vs. Abstraction :
 
