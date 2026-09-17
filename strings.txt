@@ -1,0 +1,153 @@
+--------------------------- STRINGS -----------------------------
+
+    String is sequence of characters.It is a non-primitive.In java.lang package.
+
+    String class is immutable class.  
+
+    String s = "naveen" --> literal method. (s is stored in string pool of heap,before that it is stored in premgen which is not part of heap.)
+
+    String s = new String("naveen");
+
+    -> only compile time constants go to string pool automatically.
+    -> Runtime created string go to heap.
+
+    1.  String s1 = "na" + "veen";
+        String s2 ="veen";
+
+        sout(s1==s2);  -> true (s1 calcuated at compile time and both are stored in string pool.)
+
+    2.  String s1 = "na";
+        String s2 = s1 + "veen";
+        String s3 = "naveen";
+
+        sout(s2==s3) -> false  (s3 is in string pool and s2 is in  heap because that equation creates new object by stringbuilder)
+
+    3.  String s1 = new String("naveen");
+        String s2 = "naveen"
+
+        here s1 creates object in heap and string pool as well because we are using "naveen" in string constructor.
+
+        s1 points object in heap and s2 points object in string pool but it is created while creating s1 object and nothing points to it.
+
+    Problem : String  immutability.
+
+        String s = "";           -> creates object in string pool
+        
+        for(int i=0;i<5;i++){
+            s += i;               -> 0 -> 01 -> 012 -> 0123 -> 01234
+        }
+
+        At every iteration new object is assigned to s and old one is left without pointing and those clearly through garbage collection.so original string are not modified instead new strings are creating this is immutability.
+
+    Internal process :
+
+    byte[]
+        Before Java 9, String internally used a char[]. Since Java 9, Java uses a byte[] along with a coder as part of Compact Strings. If the String contains only Latin-1 characters, each character can be stored in one byte instead of two bytes, reducing memory usage. If the String requires characters outside Latin-1, Java uses UTF-16 representation.
+    coder
+        it has only two values 0 & 1.
+        if all characters are from ascii then value is 0;(latin1 format - 1 byte)
+        they are from outside of ascii then value is 1;(utf 16 format - 2 byte)
+
+
+    METHODS :
+
+        constructor :
+            String ans = new String(); 
+
+            ()                      -> returns empty string.
+            ("")                    -> returns empty string.
+            (cArray)                -> let cArray any character array/ byte array it returns string.
+            (s)                     -> s be string object/string builder/string buffer object returns string.
+            (cArray,0,5)            -> substring from cArray where 0 start index and 5 end index which is not included and it returns string.
+
+        methods :
+
+            s.length()              -> returns int - length of the string.
+            s.isEmpty()             -> returns boolean 
+            s.isBlank()             -> returns boolean checks characters presence.
+            
+            s.charAt(index i)       -> returns character at index i.
+            s.toCharArray()         -> returns char array by converting string to char array.
+
+            s1 ==s2                 -> return boolean by checking references.
+            s1.equals(s2)           -> returns boolean by checking values of s1 and s2.
+            s1.equalsIgnoreCase(s2) -> returns boolean by ignoring case.
+            s1.compareTo(s2)        -> returns +ve / -ve / 0 compares by lexicographically.
+                                        -ve if s1 < s2
+                                        0   if s1==s2
+                                        +ve if s1 >s2
+            
+            s1.contains(string i)   -> returns boolean by checking i contains in s1 or not.
+            s1.indexOf(char i)      -> returns int index of i if present in s1(char,string).if not returns -1.
+            s1.lastIndexOf(str i)   -> returns index of string starting with i from its last apperance in string (i can be string,char)
+            s1.startWith(str i)     -> return boolean
+            s1.endsWith(str i)      -> returns boolean
+
+            s1.subString(start,end)         -> returns string with characters from start index to end index from s1. and end index character is not inclusive.you can also use it with only one parameter i.e, start index.
+            s1.toUpperCase()                ->
+            s1.toLowerCase()                ->
+            s1.trim()                       -> removes spaces from string from both sides.
+            s1.strip()                      -> new version of trim removes using Character.isWhiteSpace().
+            s1.repeat(int i)                -> returns i times of s1.
+            s1.replace(old,new)             -> replaces old with new char.(old and new are characters/strings)
+            s1.replaceAll(old,new)          -> replaces all occurences of old with new.
+
+            s1.split(",")                   -> returns array with elements splited by delimiter ",".
+            String.join(delimiter,elements) -> returns string with elements with separeted by delimiter.
+
+            String s1 = new String(String.valueOf(10));
+            byte[] arr = s1.getBytes();     -> returns byte array.
+
+            intern() :
+
+                String s1 = new String("hello");
+                String s2 = s1;
+
+                hello object is in string pool and nothing is pointing to it. hello object is also created heap and s1 points it.
+                s2 contains s1 reference both points to object in heap.
+                instead of writing String s2 = s1;
+                if we write String s2 = s1.inter(); -> s2 points to object in string pool instead of object in heap.
+
+            format() :
+
+                sout(String.format("hello %s, iam %s,"naveen","rajitha"));
+
+StringBuilder & StringBuffer :
+
+    To counter string immutability and memory saving these were introduced.
+
+        -> Both inherits from AbstractStringBuilder class and belongs to java.lang package.
+
+    Different between StringBuilder and StringBuffer is 
+
+        -> StringBuilder is not thread-safe and StringBuffer is thread-safe.
+
+        StringBuilder & StringBuffer internal process :
+
+            while creating object using stringBuilder/stringBuffer it creates 16 character capacity array and when it is filled it creates extra space by using this formula 2x+2.
+            
+    constructors in StringBuilder :
+
+        StringBuilder sb = new StringBuilder();
+                           new StringBuilder(50);    -> capacity initializes to 50.
+                           new StringBuilder("java") -> capacity of 16 + 4.
+
+    methods :
+
+           sb.append(str)                      -> adds str at the end of the sb.
+           sb.insert(index,str)                -> adds str at index str.
+           sb.delete(start,end)                -> delete substring from sb from index start to end,end is exclusive.
+           sb.deleteCharAt(index)              -> deletes char at index from sb.
+           sb.replace(start,end,str)           -> replaces string from start index to end index with str in sb.
+           sb.reverse()                        -> reverses the sb.
+           sb.charAt(i)                        -> returns char at i.
+           sb.setCharAt(index,char)            -> sets char at index.
+           sb.length()                         -> length of sb.
+           sb.capacity()                       -> gives capacity of sb.
+           sb.ensureCapacity(min)              -> we can initialize capacity with minimum capacity.
+           sb.trimToSize()                     -> removes extra buffer space.
+
+    To covert sb to string we use toString().
+    StringBuilder and StringBuffer both wont override equals() it means they only references of two StringBuilder or two StringBuffers.
+    StringBuilder is faster than StringBuffer.
+    
