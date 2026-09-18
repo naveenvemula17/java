@@ -1,0 +1,112 @@
+---------------------------- GENERICS ------------------------
+
+In Java, upcasting and downcasting are type conversions between a parent class and a child class. They’re mainly used with inheritance and polymorphism.
+They should be parent and child classes objects.
+
+Upcasting : Child object → Parent reference
+    Object obj = new String();
+
+    int a      = 25;
+    long num   = a;
+
+Downcasting : Parent reference → Child reference
+
+    String str = new Object();       // compiler error.
+
+    Object obj = 10;
+    String str = (String) obj;      // ClassCastException.
+
+        Integer object 10 is at object reference obj because Object reference can store Integer object (Integer is subclass of Number and Number is subclass of Object.) 
+        Here (String ) says treat this obj as a String,but obj is Integer object so here casting exception raises.
+
+-> When we want to create a variable which can take any datatype we use object.it has getters and setters as well and in getters while accessing we added 5 while printing 
+
+    obj.getValue() + 5; even though value is Integer we get error because if it was boolean it makes no sense to use + operator.
+
+        class Main {
+        public static void main(String[] args) {
+            Check obj = new Check(49);
+            obj.setValue(true);
+            System.out.println((Boolean)obj.getValue() + 1);
+            }
+        }
+
+        class Check{
+            private Object value;
+            Check(Object value){
+                this.value = value;
+            }
+
+            Object getValue(){
+                return this.value;
+            }
+
+            void setValue(Object value){
+                this.value = value;
+            }
+        }
+
+    Limitations :
+
+        1.Type information is lost.
+        2.wrong object could be inserted.
+        3.casting became necessary when reading.
+        4.many errors shift to runtime.
+
+    Generics solves all this problems.
+
+    <T> - Type parameter.
+
+    1. Generics in class.
+
+        class Main {
+            public static void main(String[] args) {
+            Check<Integer> obj = new Check<>(49);
+            System.out.println(obj.getValue() + 1);
+            }
+        }
+
+        class Check <T> {
+            private T value;
+            Check(T value){
+                this.value = value;
+            }
+
+            T getValue(){
+                return this.value;
+            }
+
+            void setValue(T value){
+                this.value = value;
+            }
+        }
+
+    2. Generics in method.
+
+            public static void main(String[] args) {
+                int x = info(77,"naveen");
+                System.out.println(x);
+            }
+
+            static <T,U> T info(T val,U valu){
+                System.out.println(valu + " is my name");
+                return val;
+            }
+
+        here java automatically treats arguments as Integer and string this is called inference.
+
+    Bounds in Generics :
+
+        UPPER BOUND :
+        
+            < T extends Number > -> datatype can be Number or its subclass.
+
+
+        
+
+
+
+
+
+
+
