@@ -101,10 +101,239 @@ Downcasting : Parent reference → Child reference
         
             < T extends Number > -> datatype can be Number or its subclass.
 
+        class Animal <T extends Organisms & Liveable >
 
+    List < Dog >    dogs    = new Array<>();
+    List < Animal > Animals = dogs            // gives us errors.
+
+    because when we write Animal.add(new Animal()), new object of type animal will be added, not dog. 
+
+    HENCE, If A is a child of B,Generic < A > is not child of < B >.
+
+        class Main {
+            public static void main(String[] args) {
+                List< Dog > list = new ArrayList<>();
+                List< Animal > obj = list;               // error: incompatible types.
+
+                Dog[] arr = new Dog[10];
+                Animal[] ans = arr;
+
+                for(Dog dog : arr){
+                    dog = new Dog();
+                }
+                ans[9] = new Animal();                     // exception ArrayStoreException.    
+
+                for(Dog dog : arr){
+                    dog.eat();
+                }
+
+                System.out.println(arr == ans);               // true
+                
+            }
+        }
+
+        class Animal{
+            void eat(){
+                System.out.println("eating.");
+            }
+            void move(){
+                System.out.println("moving.");
+            }
+        }
+
+        class Dog extends Animal{
+            void bark(){
+                System.out.println("barking.");
+            }
+        }
+
+Java generic types are invariant by default.
+
+    List< Dog > is not a subtype of List< Animal >
+
+WILDCARDS :
+
+    print(List<Animal>){
+
+    }
+    print(dogs)   // error because List<Dog> is not subtype of List<Animal>
+
+    To solve this we have wildcards :
+
+        print(List< ? > obj){
+
+        }
+
+        print(item)                // items can be dogs,cats,animals,
+
+            class Main {
+                public static void main(String[] args) {
+                    List<Dog> dogs = new ArrayList<>();
+                    List<Animal> animals = new ArrayList<>();
+                    animals.add(new Animal());
+                    animals.add(new Animal());
+                    animals.add(new Animal());
+                    print(animals);
+                    
+                }
+                static void print(List<?> values){
+                    for(Object obj : values){
+                        System.out.println(obj.getClass().getName());
+                    }
+                }
+            }
+
+    < ? extends Parent class> parent class is the upper bound. methods of only upper bound class can be called.
+    < ? super Classname >     classes which are super classes of classname. 
+    < ? super Animal >       classes which are super classes of Animal and above.
+    extends and super are opposite.
+
+    COVARIANCE :
+
+        Covariance means: if B is a subtype of A, then a type involving B can also be treated as a subtype of the corresponding type involving A.
+
+        1.String[] strings = {"A", "B"};
+
+          Object[] objects = strings;  // Valid
         
+            String extends Object
+            String[] extends Object[]
+
+            But there is a runtime danger:
+
+            Object[] objects = new String[2];
+
+            objects[0] = 10;  // ArrayStoreException
+
+            -> Java allows us to assign array of strings(subclass) to array of objects (superclass reference) is called covariance.However it is going to give exception when we modify an element number to number.
+
+    INVARIANCE :
+
+        Java generics are invariant by default.
+
+        String extends Object
+
+        List<String> extends List<Object>   // ❌ No
+
+        List<String> strings = new ArrayList<>();
+
+        List<Object> objects = strings;  // ❌ Compile-time error
+
+        Why? If this were allowed, you could do:
+
+        objects.add(123);
+
+        and put an Integer into a List<String>.
+
+        -> when you assign list of strings to list of objects it will be a error, because dont allow it the reason for it is we can add integers values to list of objects,here there will be no type safety.so java dont allow.
+
+    3.Covariance with ? extends
+
+        Java provides covariance for generics using a wildcard:
+
+        List<String> strings = new ArrayList<>();
+
+        List<? extends Object> objects = strings;  // ✅
+
+        You can read safely:
+
+        Object value = objects.get(0);
+
+        But you generally cannot add values:
+
+        objects.add("Hello");  // ❌
+
+        A useful rule is:
+
+        ? extends T → Producer → you can read T   
+
+        -> Through extends wildcards in generics java allows covariance for subtypes of defined class.And it is read only, we cannot change.
+
+    4.Covariance with ? super :
+
+        It is opposite of ? super.
+
+        Java allows assigning of list of objects to list of strings using <? super String >,we can write into it and read also but we get type object while reading.
+
+            List<Object> objects = new ArrayList<>();
+
+            List<? super String> strings = objects;  // ✅
+
+            strings.add("Hello");  // ✅
+
+            You can safely add String, but when reading, you only know that the result is an Object:
+
+            Object value = strings.get(0);
+
+    PECS rule :
+
+        Producer extends consumer super.
+
+        Producer extends means while using extends with wildcards, extends lets us only read the data which is produced.
+        consumet super means data needed to be consumed by it.so we need to add data to it.
+    
+
+    Type erasers :
+
+        Generics are compile time layer which jvm dont know,compiled code moves to jvm for execution and there will be no generics they will get replaced by object class or its sub types.
+
+        Before converting to bytecode compiler understands generics and erases its type then it gets compiled and moves to jvm for running.
 
 
+    Cannot do with GENERICs :
+
+        1. instanceOf
+
+            List<String > list = new ArrayList<>();
+            sout(list instanceOf List<String> )      // error because at runtime List<String> will be erased.
+
+        2. Method overloading
+
+            we cannot overload method :
+
+                if we overload with parameters like List<String> and List<Integer> at runtime they will be list so it will be error.
+
+    Compiler generated bridge method :
+
+        class Parent <I> {
+            T get(){
+                return null;
+            }
+        }
+
+        class Child extends Parent <String> {
+            @override
+            String get(){
+                return "hello";
+            }
+        }
+
+
+        class Paretn{
+            Object get(){
+                return null;
+            }
+        }
+
+        class Child extends Parent {
+            String get(){
+                return "hello";
+            }
+
+            Object get(){
+                get();                 ---> bridge method 
+            }
+        }
+
+Questions :
+
+    1.what is jvm allows generics? 
+        the previously used code have been useless and jvm should have been set to new syntax.
+        so generics are compiler safety test.(compiler checks the type safety of code.)
+ 
+    2.why generics dont support primitives ?
+
+        when type is erased by compiler the data type will be object but if we erase any primitive there is no any parent class.
 
 
 
