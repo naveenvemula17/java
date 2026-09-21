@@ -1,0 +1,78 @@
+------------------------------------ ITERABLE --------------------------------------
+
+Iterable is a interface which is extended by collection interface.
+
+Iterable
+   |
+Collection
+   |
+   +-- List
+   |    +-- ArrayList
+   |    +-- LinkedList
+   |
+   +-- Set
+   |    +-- HashSet
+   |    +-- LinkedHashSet
+   |    +-- TreeSet
+   |
+   +-- Queue
+        +-- PriorityQueue
+        +-- Deque
+             +-- ArrayDeque
+             +-- LinkedList
+
+To iterate datastructures for loop cant be used because all the datastructures are not indexed.
+And datastructures like linkedlist takes O(n2) to access all elements.
+
+To solve this we have Iterable interface.
+
+Iterable Interface :
+
+    It is the root interface that represent any object whose element can be transversed one by one.
+
+Iterable interface uses Iterator inteface methods to iterate.
+
+        List<Integer > list = new ArrayList<>();
+        let us assume list has some methods.
+
+        Iterator <Integer> it = list.iterator();
+
+        while(it.hasNext()){
+            System.out.println(it.next());
+        }
+
+        Iterable interface has iterator method to implement,so classes like arraylist need to implement this method and return object of ArraylistIterator class which is inner class of ArrayList.this ArrayListIterator class has methods like hasNext() and next().By using ArrayListIterator object we can access these methods and iterator through collectios.
+
+Iterabale ->
+    1.iterator()
+    2.forEach()  -> lamba
+    3.splitIterator() -> streams
+
+Iterator 
+
+    1.hasNext()
+    2.next()
+    3.remove()
+    4.forEachRemaing()
+
+concurrent modification exception :occurs when we are iterating through a collection and in middle fo iteration if the array got modified.
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        list.add(10);
+        list.add(20);
+        list.add(30);
+
+        Iterator<Integer> it = list.iterator();
+
+        while (it.hasNext()) {
+            Integer value = it.next();
+
+            if (value == 20) {
+                list.remove(value);   // ❌ may cause ConcurrentModificationException
+            }
+        }
+
+
+
+                                           
