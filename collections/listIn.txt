@@ -1,0 +1,71 @@
+--------------------------- LIST INTERFACE -------------------------
+
+        Collection interface
+                |
+        SequenceCollection interface 
+                |
+        ArrayList class
+
+Methods in SequenceCollection
+
+        1.getFirst()
+        2.getLast()
+        3.addFirst()
+        4.addLast()
+        5.removeFirst()
+        6.removeLast()
+    
+Methods in List Inteface :
+
+        1.get(index);
+        2.index(index,E val)
+        3.add(index,E val)
+        4.addAll(index,Collection<? extends E> )  returns boolean
+        5.remove(index)
+        6.indexOf(Object o)
+        7.lastIndexOf(Object o)
+        8.listIterator()
+        9.listIterator(Index 0)
+        10.of()                        // creates immutable list.
+        11.copy()                      // creates immutable list.
+                
+
+ArrayList :
+
+    it increases by 1.5 times of previous size.
+
+    Constructors :
+
+        List<Integer> list = new ArrayList<>();
+                             new ArrayList<>(10);     //size
+                             new ArrayList<>(Collection<E> c);
+
+    methods :
+
+        get(),set()    -> O(1)
+        add(),remove() -> O(n)
+
+        only in ArrayList :
+
+            ensureCapacity();    // directly creates arraylist of length 100.instead using 1.5x
+            trimToSize()         // removes all extra size 
+
+        capacity ->  no. of elements it can hold.
+        size     ->  no. of elements it currently has.
+    
+Linkedlist :
+
+    Java uses doubly linkedlist internally.
+
+    add(),remove(),get(),set()  -> O(n)
+
+    Linkedlist is used to implement stack and Queue.
+
+
+Vector,stack and HashTable are legacy classes.
+
+Vector      -> Dynamic Array (ArrayList)
+Hashtable -> HashMap
+Stack     -> stack implementation using array.
+
+these legacy classes are thread-safe 
