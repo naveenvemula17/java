@@ -1,0 +1,19 @@
+------------------------------------ Collection ------------------------------
+
+Collection is a interface and Collections is a class.
+
+    Collection contains methods which can be used by class which implements them
+
+    1.size() 
+    2.isEmpty()
+    3.contains(Object o)
+    4.toArray()                               // retuns a array of objects.
+    5.toArray(new Integer[0])                 // return array of type Integer.
+    6.add()                                   // returns true if elements adds or false if failed to add to the collection.
+    7.remove(Object obj)                      // returns boolean (removes first occurence of obj)
+    8.addAll(Collection<? extends E> c)       // returns boolean
+    9.containsAll(Collection<?> c)            // returns boolean 
+    10.removeAll(Collection<?> c)             // returns boolean
+    11.retainAll(Collection<?> c)             // returns boolean removes elements other than given list of elements.Intersection.
+    12.clear()                                // removes all the elements
+    
