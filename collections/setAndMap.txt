@@ -1,0 +1,11 @@
+----------------------- SET / Map -----------------------
+
+-> Duplicates are not allowed.(In case of map key is unique.)
+-> constant time search operation.(avg)
+-> No indexing.
+
+
+when we add something to set/map using a method internally method uses the hashcode() to generate a number and then that number is divided by size of container and stored in a bucket where bucket is linkedlist.
+
+There is no datastructure as set in java because map and set are are of same use case except for having value in map.so set is basically a map without value.(internally set is converted to map.)
+
