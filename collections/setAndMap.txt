@@ -1,11 +1,232 @@
 ----------------------- SET / Map -----------------------
 
--> Duplicates are not allowed.(In case of map key is unique.)
--> constant time search operation.(avg)
--> No indexing.
+    -> Duplicates are not allowed.(In case of map key is unique.)
+    -> constant time search operation.(avg)
+    -> No indexing.
+
+    when we add something to set/map using a method internally method uses the hashcode() to generate a number and then that number is divided by size of container and stored in a bucket where bucket is linkedlist.
+
+    There is no datastructure as set in java because map and set are are of same use case except for having value in map.so set is basically a map without value.(internally set is converted to map.)
+
+    Map / Set in java.
+
+        1.using hashcode() a number is generated.
+        2.bucket is decided by using modulo operation on generated number.
+        3.number is stored in bucket in linkedlist struture.
+
+    Adding keys in map :
+
+        1.After getting bucket index it checks hashcode() 
+            different -> both are different keys.
+            same      -> checks .equals() with keys of both nodes -> if same both are duplicates else not duplicates.
+
+        why hashcode() directly we can use .equals() ?
+
+            hashcode() is faster.
+
+    COLLISION :
+
+        when to node have same bucket index collision takes place.
+
+        To prevent this we have :
+
+            1.In java we have Linkelist (chaining).
+            2.Open Addressing.(not in java.) 
+
+        Open Addressing also called as linear probing, here we to avoid collision we assign space next to it.
+
+    Load factor :
+
+        number of elements / number of capacity > 0.75 
+
+        we do rehashing by increasing the size of the bucket to reduce the collisions.
+
+    ** Java initially creates bucket of capacity 16.
+
+    TREEFICATION :(Java 8+)
+
+        when length of linkedlist is above 8 it is converted to self-balancing Binary Search Tree(red-black Tree.-> to make time complexity O(1) from O(N))
+
+LinkedHashSet and LinkedHashMap :
+
+    -> Extends HashSet and HashMap.
+    -> Internally linkedlist is created to preserve insertion order.
+
+TreeMap and TreeSet :
+
+    To store we use red-black tree not hashing.
+
+    -> Methods complexity changes to O(log N) we use this for additional methods like keys in sorted order,largest, smallest keys...
+
+-> HashMap, LinekedHashMap,HashSet and LinkedHashSet can store one null key which is at start of bucket index and infinite null values.
+-> TreeMap and TreeSet cannot store null because it wont use Hashing concept(TreeSet uses compareTo().)
+
+Structure :
+
+Collection
+    |
+    +── Set (interface)
+         |
+         +── HashSet (class)
+         |     |
+         |     +── LinkedHashSet (class)
+         |
+         +── SortedSet (interface)
+         |     |
+         |     +── NavigableSet (interface)
+         |            |
+         |            +── TreeSet (class)
+         |
+         +── EnumSet (class)
+
+Construtors of HashSet and LinkedHashSet :
+
+    Set<Integer> set = new HashSet<>();                   // 16 size
+                       new HashSet<>(100);                // 100 initial capacity.
+                       new HashSet<>(100,0.8f);           // 100 initial capacity, 0.8 load capacity.
+                       new HashSet<>(List.of(1,2,3,4));   // with another collection.
+
+    -> Same for constructors signatures for LinkedHashSet.
+    And both contains methods from Collection interface.(no extra methods.)
+
+TreeSet :
+
+    Set<Integer> set = new TreeSet<>(); 
+    Cannot initialise with initial capacity and load factor.
+    Set<Integer> set = new TreeSet<>(List.of(1,2,3,4,5));
+
+    Methods from sortedSet Interface :
+
+        To use methods from SortedSet interface the object reference should be TreeSet.
+
+        methods take O(log N)
+        set.first()                       // smallest value.
+        set.last()                        // largest value.
+        set.headSet(ele)                  // if ele = 80 returns all keys less than 80.
+        set.tailSet(ele)                  // if ele = 80 returns all keys >= 80.
+        set.subSet(fromEle,toEle)         // returns all keys from range fromEle to toEle here fromEle is inclusive and toEle is exclusive.
+
+    Methods from NavigableSet Interface :
+
+        set.lower(ele)                      // largest number smaller than ele.
+        set.floor(ele)                      // largest number smaller than ele or equal to ele.
+        set.higher(ele)                     // smallest number greater than ele
+        set.ceil(ele)                       // smallest number greater than ele or equal to ele.
+        set.pollFirst()                     // removes smallest number and returns it.
+        set.pollLast()                      // removes largest number and returns it.
+        set.descendingSet()                 // keys in descending order.
+        set.headSet(ele,boolean)            // if ele = 80 returns all keys less than 80.boolean to include 80 or not.
+        set.tailSet(ele,boolean)            // if ele = 80 returns all keys > 80.boolean to include 80 or not.
+        set.subSet(s,boolean,e,boolean)             // returns range of elements from s to e.boolean to include them.
+
+MAP :
+
+    map.size()
+    map.isEmpty()
+    map.containsKey(key)                    // O(1)
+    map.containsValue(val)                  // O(n)
+    map.get(key)                            // returns val if present if not null.
+    map.put(key,val)                        // return null if we add new key and if key is already present in map then it returns old value and updates value to new value.
+    map.remove(key)
+    map.putAll(map2)                        // puts all key value pairs in map from map2
+    map.clear()   
+
+    map.keySet()                           // returns set of keys.
+    map.values()                           // returns collection becaues values can be duplicate.
+    map.entrySet()                         // returns set of type entry -> Set<Map.Entry<K,V>> enties =.
+    map.getOrDefault(key,defaultValue)     // if key is present its values is returned otherwise defaultValue.
+    map.putIfAbsent(key,value)             // value is unchanged if key is present in map otherwise new entry is added to map.
+    map.remove(key,value)                  // removes only when there an entry with key and value.
+    map.replace(key,newValue)              // if the key is present in map value is replace to newValue otherwise there will be no impact.
+    map.replace(key,oldValue,newValue)  
+
+    Set<Map.Entry<Integer,String>> entries =map.entrySet();
+
+    for(Map.Entry<Integer,String> entry : entries){
+        Integer key = entry.getKey();
+        String value =  entry.getValue(); 
+    }  
+
+    Map<Integer,String> map = Map.of(1,"naveen",2,"rajitha",3,"nithin");
+
+Constructors for Hashmap and LinkedHashMap :
+
+    Map<Integer> Map = new HashMap<>();                   // 16 size
+                    new HashMap<>(100);                // 100 initial capacity.
+                    new HashMap<>(100,0.8f);           // 100 initial capacity, 0.8 load capacity.
+                    new HashMap<>(Map.of(1,2,3,4));   // with another collection.
+
+    same constructor for LinkedHashMap.
+
+Methods in TreeMap :
+
+    -> sortedMap methods
+  
+        map.firstKey()                           //returns smallest key if it is string smallest key in lexicographically.
+        map.lastKey()                            //returns greatest key 
+        map.firstEntry()                         // returns smallest key entry.
+        map.lastEntry()                          // returns greatest key entry.
 
 
-when we add something to set/map using a method internally method uses the hashcode() to generate a number and then that number is divided by size of container and stored in a bucket where bucket is linkedlist.
+        map.headMap (key)                       // return type is navigable map(key,value),returns all keys which are smaller than key and key is exclusive.
+        map.tailMap(key)                        // return all keys which are greater than and equal to key.
 
-There is no datastructure as set in java because map and set are are of same use case except for having value in map.so set is basically a map without value.(internally set is converted to map.)
+    -> Navigable map methods.
+
+        map.lowerKey(key)                         // greatest key smaller than key
+        map.lowerEntry(key)                       // greatest entry smaller than key
+        map.floorkey()
+        map.floorEntry(key)
+        map.ceilKey()
+        map.ceilEntry()
+        map.higherKey()
+        map.higherEntry()
+        map.pollFirstEntry()
+        map.pollLastEntry()
+        map.pollFirstKey()    -> not exists
+        map.descendingMap()                      // reverse map
+        map.headMap()
+        map.tailMap()
+        map.subMap()
+
+Hashtable :
+
+    It is a legacy class.(before collection framework it is used to be like HashMap.)
+    It is thread-safe.
+
+Properties :
+
+    It extends HashTable.
+    specialized map to represent config data.
+
+WeakHashMap :
+
+     Rarely used.
+     for cache like behaviour.
+    Due to weak references it is called WeakHashMap.
+
+IdentityHashMap :
+
+    HashMap internally uses .equals method.
+    but IdentityHashMap internally uses == operator. 
+
+    used in graph algo,cycle detection and finding topology.
+
+EnumMap :
+
+    using enum variables as map keys.  
+    due to ordinal of enums members collision chances is nearly zero.(unlike hashing)
+    memory efficient and null keys are not allowed.
+    Iteration order is preferred.
+
+ConcurrentHashMap :
+
+    Latest thread-safe map.
+    In multithreaded environment.
+    
+
+
+
+
+
 
