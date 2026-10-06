@@ -1,0 +1,28 @@
+--------------------------- Comparable Interface ------------------
+
+    comparable interface contains s1.compareTo(s2) which returns integer because it only contains one method it is called functional inteface.
+
+    rule :
+
+        if a.compareTo(b) == 0                       // java treats a and b as same object.
+        make sure a.equals(b) -> true.
+        because in treeset and treemap both dont allow duplicates so data loss make occur.
+
+Collections class :
+
+    It is a utility class which contains static methods and works on collections.
+
+    .sort()
+    .min()
+    .max()
+    .fill(list,0)                   // fills list with zeroes.
+    .reverse()
+    .shuffle()                      // shuffles elements
+    .swap(list,a,b)
+    .binarySearch(list,ele)
+    .frequency(list,ele)            // gives frequency of ele in list.
+    .unmodifiableList(list)         // retunds list which is read only.
+    .unmodifiableSet(list) 
+    .unmodifiableMap(list) 
+    .emptyList()                    // returns empty list which is immutable.
+     set map
